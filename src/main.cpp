@@ -1,7 +1,9 @@
 #include <iostream>
 #include <cstdint>
 #include <fstream>
+#include <bitset>
 #include <string>
+#include <ios>
 
 #pragma pack(push, 1) // Avoid adding hidden memory alignment padding
 struct TTFHeader{
@@ -55,7 +57,7 @@ int main(int argc, char *argv[]){
   ttfHeader.rangeShift    = bigEndian16_t(ttfHeader.rangeShift);
 
   std::cout << "--- TTF Header ---\n";
-  std::cout << "SFNT Version  : 0x" << ttfHeader.sfntVersion << std::dec << '\n';
+  std::cout << "SFNT Version  : 0x" << std::bitset<32>(ttfHeader.sfntVersion) << '\n';
   std::cout << "Tables Count  : " << ttfHeader.numTables << '\n';
   std::cout << "Search Range  : " << ttfHeader.searchRange << '\n';
   std::cout << "Entry Selector: " << ttfHeader.entrySelector << '\n';
